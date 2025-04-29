@@ -14,7 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const logout = async () =>{
-    await axios.get("http://localhost:8081/api/v1/user/logout", {
+    await axios.get("https://user-auth-project.glitch.me/api/v1/user/logout", {
       withCredentials: true,
     }).then(res =>{
       toast.success(res.data.message);

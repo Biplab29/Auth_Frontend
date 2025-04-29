@@ -40,7 +40,7 @@ const OtpVerification = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8081/api/v1/user/otp-verification",
+        "https://user-auth-project.glitch.me/api/v1/user/otp-verification",
         data,
         {
           headers: { "Content-Type": "application/json" }, 

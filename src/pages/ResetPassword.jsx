@@ -14,7 +14,7 @@ const ResetPassword = () => {
 
   const handleResetPassword = async(e) =>{
     e.preventDefault();
-    await axios.put(`http://localhost:8081/api/v1/user/password/reset/${token}`, {password, confirmPassword}, {
+    await axios.put(`https://user-auth-project.glitch.me/api/v1/user/password/reset/${token}`, {password, confirmPassword}, {
       withCredentials: true,
       headers:{
         'Content-Type': 'application/json'

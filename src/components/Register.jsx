@@ -17,7 +17,7 @@ const Register = () => {
   const handleRegister = async (data) => {
     data.phone = `+91${data.phone}`;
     await axios
-      .post("http://localhost:8081/api/v1/user/register", data, {
+      .post("https://user-auth-project.glitch.me/api/v1/user/register", data, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       })

@@ -10,34 +10,39 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Footer from "../layout/Footer";
 
 const Home = () => {
-  const {isAuthenticated, setIsAuthenticated, setUser} = useContext(Context);
+  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(Context);
   const navigate = useNavigate();
 
-  const logout = async () =>{
-    await axios.get("https://user-auth-project.glitch.me/api/v1/user/logout", {
-      withCredentials: true,
-    }).then(res =>{
+  const logout = async () => {
+    try {
+      const res = await axios.get("https://user-auth-project.glitch.me/api/v1/user/logout", {
+        withCredentials: true,
+      });
       toast.success(res.data.message);
       setUser(null);
       setIsAuthenticated(false);
-    }).catch(err =>{
-      toast.error(err.response.data.message);
+      navigate("/auth"); // Redirect to the auth page
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Error logging out");
       console.error(err);
-    });
+    }
   };
-if(!isAuthenticated){
-  return <Navigate to="/auth" />;
-}
-  return <>
-  <section className="home">
-  <Hero />
-  <Instructor />
-  <Technologies />
-  <Footer />
-  <button onClick={logout}> Logout </button>
-  </section>
-  
-  </>;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth" />;
+  }
+
+  return (
+    <>
+      <section className="home">
+        <Hero />
+        <Instructor />
+        <Technologies />
+        <Footer />
+        <button onClick={logout}>Logout</button>
+      </section>
+    </>
+  );
 };
 
 export default Home;
